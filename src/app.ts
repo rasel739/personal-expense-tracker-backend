@@ -2,6 +2,7 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
+import routes from './app/routes';
 const app: Application = express();
 
 // enable cors
@@ -16,6 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', (req: Request, res: Response) => {
   res.send('Personal Expense Tracker Backend is Running...');
 });
+
+// import all routes
+app.use('/api/v1', routes);
 
 // handle not found routes
 app.use((req: Request, res: Response, next: NextFunction) => {

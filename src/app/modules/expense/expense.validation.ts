@@ -21,7 +21,7 @@ export const updateExpenseZodSchema = z.object({
 });
 
 export const expenseQueryZodSchema = z.object({
-  body: z.object({
+  query: z.object({
     type: z.enum(['INCOME', 'EXPENSE']).optional(),
     category: z.string().optional(),
   }),

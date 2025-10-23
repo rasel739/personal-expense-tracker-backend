@@ -11,9 +11,15 @@ const router = express.Router();
 router.use(auth);
 
 router.post(
-  '/create',
+  '/',
   validateRequest(ExpenseValidation.createExpenseZodSchema),
   ExpenseController.createExpense
+);
+
+router.get(
+  '/',
+  validateRequest(ExpenseValidation.expenseQueryZodSchema),
+  ExpenseController.getExpense
 );
 
 export const ExpenseRoutes = router;

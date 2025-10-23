@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx --watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
     "prisma:migrate": "prisma migrate dev --name init",
@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "Personal Expense Tracker Backend Application. Built with Node.js, Express, and TypeScript.",
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",

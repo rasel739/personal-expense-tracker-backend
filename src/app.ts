@@ -14,13 +14,16 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// test route
-app.use('/', (req: Request, res: Response) => {
-  res.send('Personal Expense Tracker Backend is Running...');
-});
-
 // import all routes
 app.use('/api/v1', routes);
+
+// test route
+app.use('/', (req: Request, res: Response, next: NextFunction) => {
+  if (req.path === '/') {
+    return res.send('Personal Expense Tracker Backend is Running...');
+  }
+  next();
+});
 
 // global error handler
 app.use(globalErrorHandler);

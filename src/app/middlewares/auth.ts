@@ -8,15 +8,9 @@ import ApiError from '../../errors/ApiError';
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
     //get authorization token
-    const token = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-    if (!token || !token.startsWith('Bearer ')) {
-      res.status(401).json({
-        success: false,
-        error: 'No token provided',
-      });
-      return;
-    }
+    const token = authHeader?.startsWith('Bearer ') ? authHeader.split(' ')[1] : authHeader;
 
     if (!token) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');

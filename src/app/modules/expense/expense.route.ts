@@ -22,4 +22,14 @@ router.get(
   ExpenseController.getExpense
 );
 
+router.get('/summary', ExpenseController.getExpenseSummary);
+
+router.patch(
+  '/:expenseId',
+  validateRequest(ExpenseValidation.updateExpenseZodSchema),
+  ExpenseController.updateExpense
+);
+
+router.delete('/:expenseId', ExpenseController.deleteExpense);
+
 export const ExpenseRoutes = router;

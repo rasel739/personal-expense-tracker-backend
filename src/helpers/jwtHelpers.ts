@@ -1,7 +1,7 @@
 import jwt, { JwtPayload, Secret, SignOptions } from 'jsonwebtoken';
 
 const createToken = (
-  payload: string | Buffer | Record<string, unknown>,
+  payload: string | object | Record<string, unknown>,
   secret: Secret,
   expireTime: string | number
 ): string => {

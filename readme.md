@@ -12,17 +12,16 @@ https://github.com/rasel739/personal-expense-tracker-backend.git
 1. `cd personal-expense-tracker-backend`
 2. `cp .env.example .env`
 3. `yarn install`
-4. `npx prisma generate`
-5. `npx prisma migrate dev --name init`
-6. `yarn start`
+4. `npx prisma:migrate`
+5. `yarn dev`
 
 ## API
 
-Base: `http://localhost:5000/`
+Base: `http://localhost:5000/api/v1`
 
 ### Auth
 
-- `POST /api/auth/register` { name, email, password }
+- `POST /api/auth/register` { name, email, password } -> return `{token}`
 - `POST /api/auth/login` { email, password } -> returns `{ token }`
 
 ### Expenses (auth required: `Authorization: Bearer <token>`)

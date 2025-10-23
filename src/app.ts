@@ -3,10 +3,11 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
 import routes from './app/routes';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 const app: Application = express();
 
 // enable cors
-app.use(cors());
+app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(cookieParser());
 
 // parsing middleware
@@ -20,6 +21,9 @@ app.use('/', (req: Request, res: Response) => {
 
 // import all routes
 app.use('/api/v1', routes);
+
+// global error handler
+app.use(globalErrorHandler);
 
 // handle not found routes
 app.use((req: Request, res: Response, next: NextFunction) => {

@@ -1,6 +1,5 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
 import routes from './app/routes';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
@@ -8,7 +7,6 @@ const app: Application = express();
 
 // enable cors
 app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
-app.use(cookieParser());
 
 // parsing middleware
 app.use(express.json());

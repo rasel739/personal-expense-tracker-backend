@@ -61,7 +61,11 @@ yarn install
 ### 🔹 Run Database Migration
 
 ```bash
-yarn prisma:migrate
+yarn prisma:migrate:dev
+```
+
+```bash
+yarn prisma:migrate:dev
 ```
 
 ---

@@ -30,8 +30,6 @@ const getExpense = async (
   userId: string,
   filters?: { type: ExpenseType; category?: string }
 ): Promise<ICreateExpenseResonse[]> => {
-  const whereClause: any = { userId };
-
   const expenses = await prisma.expense.findMany({
     where: {
       userId,

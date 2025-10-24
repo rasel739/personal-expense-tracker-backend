@@ -14,9 +14,6 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
 
-    /* Type Declarations */
-    "types": ["node", "express"],
-
     /* Strict Type Checking */
     "strict": true,
     "forceConsistentCasingInFileNames": true,

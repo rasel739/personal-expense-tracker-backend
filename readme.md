@@ -65,7 +65,7 @@ yarn prisma:migrate:dev
 ```
 
 ```bash
-yarn prisma:migrate:dev
+yarn prisma:migrate:prod
 ```
 
 ---

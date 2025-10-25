@@ -6,7 +6,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 const app: Application = express();
 
 // enable cors
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
+app.use(cors());
 
 // parsing middleware
 app.use(express.json());

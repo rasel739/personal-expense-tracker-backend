@@ -28,7 +28,18 @@ const userLogin = (0, catchAsync_1.default)(async (req, res) => {
         data: result,
     });
 });
+const getUser = (0, catchAsync_1.default)(async (req, res) => {
+    const { id } = req.user;
+    const result = await auth_service_1.AuthService.getUser(id);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'User get successfully',
+        data: result,
+    });
+});
 exports.AuthController = {
     userRegister,
     userLogin,
+    getUser,
 };

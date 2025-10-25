@@ -5,6 +5,7 @@ import { ILogin, IUser, IUserResponse } from './auth.interface';
 import bcrypt from 'bcrypt';
 import config from '../../../config';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
+import { email } from 'zod';
 
 const userRegister = async (payload: IUser): Promise<IUserResponse> => {
   const existingUser = await prisma.user.findUnique({
@@ -42,7 +43,7 @@ const userLogin = async (payload: ILogin): Promise<IUserResponse> => {
   });
 
   if (!existingUser) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Invalid credentials');
   }
 
   const isPasswordMatched = await bcrypt.compare(payload.password, existingUser.password);
@@ -62,7 +63,32 @@ const userLogin = async (payload: ILogin): Promise<IUserResponse> => {
   };
 };
 
+const getUser = async (
+  userId: string
+): Promise<{ user: { id: string; name: string; email: string } }> => {
+  const userCheck = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  if (!userCheck) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  const user = {
+    id: userCheck.id,
+    name: userCheck.name,
+    email: userCheck.email,
+  };
+
+  return {
+    user,
+  };
+};
+
 export const AuthService = {
   userRegister,
   userLogin,
+  getUser,
 };

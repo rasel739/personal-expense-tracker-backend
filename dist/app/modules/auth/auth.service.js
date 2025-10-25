@@ -35,7 +35,7 @@ const userLogin = async (payload) => {
         where: { email: payload.email },
     });
     if (!existingUser) {
-        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, 'User not found');
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, 'Invalid credentials');
     }
     const isPasswordMatched = await bcrypt_1.default.compare(payload.password, existingUser.password);
     if (!isPasswordMatched) {
@@ -46,7 +46,26 @@ const userLogin = async (payload) => {
         accessToken,
     };
 };
+const getUser = async (userId) => {
+    const userCheck = await prisma_1.default.user.findUnique({
+        where: {
+            id: userId,
+        },
+    });
+    if (!userCheck) {
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, 'User not found');
+    }
+    const user = {
+        id: userCheck.id,
+        name: userCheck.name,
+        email: userCheck.email,
+    };
+    return {
+        user,
+    };
+};
 exports.AuthService = {
     userRegister,
     userLogin,
+    getUser,
 };
